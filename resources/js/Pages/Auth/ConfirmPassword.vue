@@ -10,7 +10,7 @@
     <form @submit.prevent="submit">
         <div>
             <BreezeLabel for="password" value="Password" />
-            <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" autofocus />
+            <BreezeInput id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="current-password" autofocus />
         </div>
 
         <div class="flex justify-end mt-4">
@@ -23,14 +23,14 @@
 
 <script>
 import BreezeButton from '@/Components/Button.vue'
-import BreezeGuestLayout from '@/Layouts/Guest.vue'
+import Layout from '@/Layouts/Layout.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeLabel from '@/Components/Label.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
-    layout: BreezeGuestLayout,
+    layout: Layout,
 
     components: {
         BreezeButton,
