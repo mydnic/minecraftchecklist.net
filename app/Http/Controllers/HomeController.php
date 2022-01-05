@@ -11,8 +11,7 @@ class HomeController extends Controller
     {
         $objectives = Objective::latest()->take(4 * 4)->get();
 
-        if (auth()->check()) {
-            $world = auth()->user()->defaultWorld();
+        if (auth()->check() && $world = auth()->user()->defaultWorld()) {
             $objectives = $objectives->map(function ($objective) use ($world) {
                 $objective->completed = $objective->worlds->contains($world->id);
                 $objective->worlds = $objective->worlds->where('user_id', auth()->id());

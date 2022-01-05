@@ -18,8 +18,7 @@ class ObjectiveController extends Controller
     {
         $objectives = Objective::withCount('worlds')->with('worlds')->get();
 
-        if (auth()->check()) {
-            $world = auth()->user()->defaultWorld();
+        if (auth()->check() && $world = auth()->user()->defaultWorld()) {
             $objectives = $objectives->map(function ($objective) use ($world) {
                 $objective->completed = $objective->worlds->contains($world->id);
                 $objective->worlds = $objective->worlds->where('user_id', auth()->id());
