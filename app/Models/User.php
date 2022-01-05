@@ -46,4 +46,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(World::class);
     }
+
+    public function defaultWorld()
+    {
+        return $this->worlds()->where('default', true)->first();
+    }
+
+    public function getAvatar()
+    {
+        return 'https://unavatar.now.sh/' . $this->email;
+    }
 }

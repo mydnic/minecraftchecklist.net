@@ -15,9 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@home')->name('home');
+Route::get('/checklist', 'ObjectiveController@index')->name('objective.index');
 
-Route::get('/dashboard', function () {
-    return inertia('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/about', 'HomeController@about')->name('about');
+
+Route::middleware('auth')->get('/objectives/create', 'ObjectiveController@create')->name('objective.create');
+Route::middleware('auth')->post('/objectives', 'ObjectiveController@store')->name('objective.store');
+
+Route::middleware('auth')->prefix('user')->group(function () {
+    Route::post('objective-toggle', 'ObjectiveController@toggle')->name('objective.toggle');
+
+    Route::resource('worlds', 'WorldController');
+    Route::put('worlds/{world}/default', 'WorldController@setAsDefault')->name('worlds.default');
+});
 
 require __DIR__ . '/auth.php';

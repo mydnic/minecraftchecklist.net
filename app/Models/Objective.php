@@ -13,6 +13,7 @@ class Objective extends Model
     use HasFactory, HasSlug, HasTranslations;
 
     public $translatable = ['title', 'description'];
+    public $fillable = ['title', 'description'];
 
     /**
      * Get the options for generating the slug.
@@ -22,5 +23,10 @@ class Objective extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public function worlds()
+    {
+        return $this->belongsToMany(World::class);
     }
 }

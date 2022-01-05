@@ -15,7 +15,8 @@ class WorldController extends Controller
      */
     public function index()
     {
-        //
+        $worlds = auth()->user()->worlds;
+        return inertia('Worlds/Index', compact('worlds'));
     }
 
     /**
@@ -25,7 +26,7 @@ class WorldController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Worlds/Create');
     }
 
     /**
@@ -36,7 +37,20 @@ class WorldController extends Controller
      */
     public function store(StoreWorldRequest $request)
     {
-        //
+        $world = auth()->user()->worlds()->create($request->validated());
+
+        if (auth()->user()->worlds()->count() === 1) {
+            $world->setAsDefault();
+        }
+
+        return redirect()->route('worlds.index');
+    }
+
+    public function setAsDefault(World $world)
+    {
+        $world->setAsDefault();
+
+        return redirect()->route('worlds.index');
     }
 
     /**

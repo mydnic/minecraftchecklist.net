@@ -9,6 +9,8 @@ class World extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'description', 'default'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -17,5 +19,12 @@ class World extends Model
     public function objectives()
     {
         return $this->belongsToMany(Objective::class);
+    }
+
+    public function setAsDefault()
+    {
+        $this->user->worlds()->update(['default' => false]);
+
+        $this->update(['default' => true]);
     }
 }

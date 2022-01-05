@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Objective;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreObjectiveRequest;
 use App\Http\Requests\UpdateObjectiveRequest;
-use App\Models\Objective;
 
 class ObjectiveController extends Controller
 {
@@ -15,7 +16,18 @@ class ObjectiveController extends Controller
      */
     public function index()
     {
-        //
+        $objectives = Objective::withCount('worlds')->with('worlds')->get();
+
+        if (auth()->check()) {
+            $world = auth()->user()->defaultWorld();
+            $objectives = $objectives->map(function ($objective) use ($world) {
+                $objective->completed = $objective->worlds->contains($world->id);
+                $objective->worlds = $objective->worlds->where('user_id', auth()->id());
+                return $objective;
+            });
+        }
+
+        return inertia('Checklist', compact('objectives'));
     }
 
     /**
@@ -25,7 +37,7 @@ class ObjectiveController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Objective/Create');
     }
 
     /**
@@ -36,7 +48,9 @@ class ObjectiveController extends Controller
      */
     public function store(StoreObjectiveRequest $request)
     {
-        //
+        Objective::create($request->validated());
+
+        return redirect()->route('objective.index');
     }
 
     /**
@@ -61,26 +75,14 @@ class ObjectiveController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateObjectiveRequest  $request
-     * @param  \App\Models\Objective  $objective
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateObjectiveRequest $request, Objective $objective)
+    public function toggle(Request $request)
     {
-        //
-    }
+        $objective = Objective::findOrFail($request->objective);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Objective  $objective
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Objective $objective)
-    {
-        //
+        $world = $request->user()->defaultWorld();
+
+        $world->objectives()->toggle([$objective->id]);
+
+        return redirect()->back();
     }
 }
