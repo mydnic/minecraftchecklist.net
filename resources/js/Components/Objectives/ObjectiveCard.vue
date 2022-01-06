@@ -4,7 +4,7 @@
             <h4 class="mb-3 font-bold text-gray-800 dark:text-gray-100">
                 {{ objective.title['en'] }}
             </h4>
-            <p v-if="objective.description['en']" class="text-sm text-gray-800 dark:text-gray-100">
+            <p v-if="objective.description && objective.description['en']" class="text-sm text-gray-800 dark:text-gray-100">
                 {{objective.description['en']}}
             </p>
         </div>
