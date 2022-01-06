@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $objectives = Objective::latest()->take(4 * 4)->get();
+        $objectives = Objective::withCount('worlds')->orderBy('worlds_count', 'desc')->take(4 * 4)->get();
 
         if (auth()->check() && $world = auth()->user()->defaultWorld()) {
             $objectives = $objectives->map(function ($objective) use ($world) {
