@@ -54,6 +54,6 @@ class User extends Authenticatable
 
     public function getAvatar()
     {
-        return 'https://unavatar.now.sh/' . $this->email;
+        return 'https://unavatar.io/' . $this->email;
     }
 }
