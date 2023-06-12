@@ -27,7 +27,7 @@
         "laravel/telescope": "^4.14",
         "mockery/mockery": "^1.6.1",
         "nunomaduro/collision": "^7.5",
-        "phpunit/phpunit": "^10.2.1",
+        "phpunit/phpunit": "^10.2.2",
         "spatie/laravel-ignition": "^2.1"
     },
     "repositories": [
