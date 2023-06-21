@@ -4195,16 +4195,16 @@
         },
         {
             "name": "spatie/laravel-translatable",
-            "version": "6.5.1",
+            "version": "6.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-translatable.git",
-                "reference": "b8f102492f816608d832cfe9e420da6a856312cf"
+                "reference": "29d08d2088bda0d2b05452a348a7af2e81f9c668"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/b8f102492f816608d832cfe9e420da6a856312cf",
-                "reference": "b8f102492f816608d832cfe9e420da6a856312cf",
+                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/29d08d2088bda0d2b05452a348a7af2e81f9c668",
+                "reference": "29d08d2088bda0d2b05452a348a7af2e81f9c668",
                 "shasum": ""
             },
             "require": {
@@ -4265,7 +4265,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-translatable/issues",
-                "source": "https://github.com/spatie/laravel-translatable/tree/6.5.1"
+                "source": "https://github.com/spatie/laravel-translatable/tree/6.5.2"
             },
             "funding": [
                 {
@@ -4273,7 +4273,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-06T10:22:13+00:00"
+            "time": "2023-06-20T18:08:15+00:00"
         },
         {
             "name": "spatie/nova-translatable",
