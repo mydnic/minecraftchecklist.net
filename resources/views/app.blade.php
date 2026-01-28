@@ -18,6 +18,11 @@
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script
+            src="https://rybbit.dricle.be/api/script.js"
+            data-site-id="undefined"
+            defer
+        ></script>
     </head>
     <body class="font-sans antialiased">
         @inertia
